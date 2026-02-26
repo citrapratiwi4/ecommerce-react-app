@@ -374,7 +374,7 @@ export const products = [
   },
   {
     id: 23,
-    name: "Mentera Sandals",
+    name: "Faudia Sandals",
     category: "Footwear",
     price: 900000,
     soldCount: 110,
