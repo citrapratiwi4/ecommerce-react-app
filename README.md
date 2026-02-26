@@ -1,21 +1,41 @@
-HEAD
-# React + Vite
+# Fashion Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive e-commerce web application built using modern React and Vite.  
+This project was developed as the Final Project of the Web Development Pathway.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Product listing page
+- Product detail page
+- Add to cart functionality
+- Shopping cart management
+- Checkout simulation
+- Responsive design
+- Component-based architecture
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- React Router DOM 7
+- Vite 7
+- Tailwind CSS 4
 
-## Expanding the ESLint configuration
+## 📦 Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository
+2. Install dependencies  
+   npm install
+3. Run development server  
+   npm run dev
 
-# ecommerce-react-app
-Final Project of Web Development Pathway.A responsive e-commerce web application built with React, implementing component-based architecture, routing, state management, and modern UI design principles
-8739c80e2ea6ad812080cbc172f66e688e6ac9cd
+## 📌 Requirements Fulfilled
+
+✔ React 18+ (Using React 19)  
+✔ Vite as build tool  
+✔ React Router DOM for routing  
+✔ Tailwind CSS for styling  
+
+## 👩‍💻 Author
+
+Citra Pratiwi  
+Final Project – Web Development Pathway
