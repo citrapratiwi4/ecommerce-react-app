@@ -67,7 +67,7 @@ import mary from "../assets/images/mary.jpg";
 import mary1 from "../assets/images/mary1.jpg";
 import mary3 from "../assets/images/mary3.jpg";
 import mary4 from "../assets/images/mary4.jpg";
-import mentera from "../assets/images/mentera.jpg";
+import menteras from "../assets/images/menteras.jpg";
 import mentera1 from "../assets/images/mentera1.jpg";
 import mentera2 from "../assets/images/mentera2.jpg";
 import almond1 from "../assets/images/almond1.jpg";
@@ -379,7 +379,7 @@ export const products = [
     price: 900000,
     soldCount: 110,
     image: mentera1,
-    hoverImage: mentera,
+    hoverImage: menteras,
     rating: 4.8,
     reviewsCount: 12,
     stock: 7,
