@@ -68,8 +68,8 @@ import mary1 from "../assets/images/mary1.jpg";
 import mary3 from "../assets/images/mary3.jpg";
 import mary4 from "../assets/images/mary4.jpg";
 import menteras from "../assets/images/menteras.jpg";
-import mentera1 from "../assets/images/mentera1.jpg";
-import mentera2 from "../assets/images/mentera2.jpg";
+import menteras1 from "../assets/images/menteras1.jpg";
+import menteras2 from "../assets/images/menteras2.jpg";
 import almond1 from "../assets/images/almond1.jpg";
 import almond2 from "../assets/images/almond2.jpg";
 import almond from "../assets/images/almond.jpg";
@@ -378,7 +378,7 @@ export const products = [
     category: "Footwear",
     price: 900000,
     soldCount: 110,
-    image: mentera1,
+    image: menteras1,
     hoverImage: menteras,
     rating: 4.8,
     reviewsCount: 12,
