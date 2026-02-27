@@ -44,7 +44,7 @@ src/
 ├── pages/         # Route components (Home, ProductDetail, Category)
 └── App.jsx        # Main application router and state provider
 
-📦 Installation & Setup
+## 📦 Installation & Setup
 To run this project locally, follow ini steps:
 
 Clone the repository
@@ -63,7 +63,8 @@ Run the development server
 
 Bash
 npm run dev
-📌 Requirements Fulfilled
+
+## 📌 Requirements Fulfilled
 [x] React 18+ (Utilizing React 19 features)
 
 [x] Vite as the primary build tool for fast HMR
@@ -76,5 +77,5 @@ npm run dev
 
 [x] Working Deployed Link via Vercel
 
-👩‍💻 Author
+## 👩‍💻 Author
 Citra Pratiwi Final Project – Web Development Pathway
