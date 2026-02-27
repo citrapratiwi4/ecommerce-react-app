@@ -1,11 +1,10 @@
-// src/App.jsx
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 // 1. IMPORT KOMPONEN & HALAMAN DARI FOLDER
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
-import WishlistPage from "./pages/Wishlist"; 
+import WishlistPage from "./pages/Wishlist";
 import AccountPage from "./pages/AccountPage";
 import CategoryPage from "./pages/CategoryPage";
 import SearchPage from "./pages/SearchPage";
@@ -55,7 +54,7 @@ function App() {
 
   const [orders, setOrders] = useState(() => {
     const savedUser = localStorage.getItem("user");
-    return savedUser ? (JSON.parse(savedUser).orders || []) : [];
+    return savedUser ? JSON.parse(savedUser).orders || [] : [];
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -73,7 +72,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("isLoggedIn", isLoggedIn);
   }, [isLoggedIn]);
-  
 
   const toggleWishlist = (product) => {
     const exists = wishlist.find((item) => item.id === product.id);
@@ -86,7 +84,10 @@ function App() {
 
   const addToCart = (product, size = null, variantName = null) => {
     const existingItemIndex = cart.findIndex(
-      (item) => item.id === product.id && item.size === size && item.variant === variantName
+      (item) =>
+        item.id === product.id &&
+        item.size === size &&
+        item.variant === variantName,
     );
 
     if (existingItemIndex !== -1) {
@@ -96,21 +97,23 @@ function App() {
     } else {
       const cartItem = {
         ...product,
-        cartItemId: Date.now(), 
-        size: size,            
-        variant: variantName,   
-        quantity: 1,           
+        cartItemId: Date.now(),
+        size: size,
+        variant: variantName,
+        quantity: 1,
       };
       setCart([...cart, cartItem]);
     }
   };
 
   const updateQuantity = (cartItemId, newQuantity) => {
-    if (newQuantity < 1) return; 
+    if (newQuantity < 1) return;
     setCart(
       cart.map((item) =>
-        item.cartItemId === cartItemId ? { ...item, quantity: newQuantity } : item
-      )
+        item.cartItemId === cartItemId
+          ? { ...item, quantity: newQuantity }
+          : item,
+      ),
     );
   };
 
@@ -132,17 +135,18 @@ function App() {
     });
 
     // . AMBIL DATA ALAMAT YANG DISIMPAN DARI CHECKOUT TADI
-    const savedShippingData = JSON.parse(localStorage.getItem("tempShippingData")) || null;
+    const savedShippingData =
+      JSON.parse(localStorage.getItem("tempShippingData")) || null;
 
     const newOrders = cart.map((item) => ({
-      date: fullDate, 
+      date: fullDate,
       product: item,
       size: item.size,
-      shippingCost: shippingCost, 
-      discountAmount: discountAmount, 
-      shippingInfo: savedShippingData // . MASUKKAN DATA ALAMAT KE RIWAYAT
+      shippingCost: shippingCost,
+      discountAmount: discountAmount,
+      shippingInfo: savedShippingData, // . MASUKKAN DATA ALAMAT KE RIWAYAT
     }));
-    
+
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (storedUser) {
@@ -153,10 +157,10 @@ function App() {
     setOrders([...orders, ...newOrders]);
     const cartProductIds = cart.map((item) => item.id);
     setWishlist(wishlist.filter((w) => !cartProductIds.includes(w.id)));
-    setCart([]); 
-    setIsCartOpen(false); 
-    setDiscountAmount(0); 
-    
+    setCart([]);
+    setIsCartOpen(false);
+    setDiscountAmount(0);
+
     // Bersihkan memori sementara alamatnya
     localStorage.removeItem("tempShippingData");
   };
@@ -164,54 +168,148 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      
+
       <Cart
         cart={cart}
         isCartOpen={isCartOpen}
         setIsCartOpen={setIsCartOpen}
         removeFromCart={removeFromCart}
-        updateQuantity={updateQuantity} 
+        updateQuantity={updateQuantity}
         checkout={checkout}
       />
-      
+
       <Routes>
-        <Route path="/" element={<Home wishlist={wishlist} toggleWishlist={toggleWishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/product/:id" element={<ProductDetail wishlist={wishlist} toggleWishlist={toggleWishlist} addToCart={addToCart} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/wishlist" element={<WishlistPage wishlist={wishlist} toggleWishlist={toggleWishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/search" element={<SearchPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/category/:categoryName" element={<CategoryPage wishlist={wishlist} toggleWishlist={toggleWishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/cart" element={<CartPage cart={cart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
-        <Route path="/login" element={<LoginPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/register" element={<RegisterPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        <Route path="/reset-password" element={<ResetPasswordPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />} />
-        
-        <Route 
-          path="/checkout" 
+        <Route
+          path="/"
           element={
-            <CheckoutPage 
-              cart={cart} 
-              checkoutAction={checkout} 
-              isLoggedIn={isLoggedIn} 
-              shippingCost={shippingCost}  
+            <Home
+              wishlist={wishlist}
+              toggleWishlist={toggleWishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetail
+              wishlist={wishlist}
+              toggleWishlist={toggleWishlist}
+              addToCart={addToCart}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <WishlistPage
+              wishlist={wishlist}
+              toggleWishlist={toggleWishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <SearchPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/category/:categoryName"
+          element={
+            <CategoryPage
+              wishlist={wishlist}
+              toggleWishlist={toggleWishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              cart={cart}
+              removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <LoginPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RegisterPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <ForgotPasswordPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <ResetPasswordPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+            />
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <CheckoutPage
+              cart={cart}
+              checkoutAction={checkout}
+              isLoggedIn={isLoggedIn}
+              shippingCost={shippingCost}
               setShippingCost={setShippingCost}
-              setDiscountAmount={setDiscountAmount} 
+              setDiscountAmount={setDiscountAmount}
             />
-          } 
+          }
         />
-  
-        <Route 
-          path="/payment" 
+        <Route
+          path="/payment"
           element={
-            <PaymentPage 
-              cart={cart} 
-              checkoutAction={checkout} 
-              shippingCost={shippingCost} 
-              discountAmount={discountAmount} 
+            <PaymentPage
+              cart={cart}
+              checkoutAction={checkout}
+              shippingCost={shippingCost}
+              discountAmount={discountAmount}
             />
-          } 
+          }
         />
-        
         <Route
           path="/account"
           element={
@@ -226,12 +324,17 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
-        <Route 
-          path="/success" 
-          element={<SuccessPage wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} isLoggedIn={isLoggedIn} />} 
+        <Route
+          path="/success"
+          element={
+            <SuccessPage
+              wishlist={wishlist}
+              cart={cart}
+              setIsCartOpen={setIsCartOpen}
+              isLoggedIn={isLoggedIn}
+            />
+          }
         />
-        
       </Routes>
     </>
   );

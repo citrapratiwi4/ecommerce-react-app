@@ -1,27 +1,19 @@
-// src/pages/SearchPage.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-// Sesuaikan path import
 import Navbar from "../components/layout/Navbar";
 import { products } from "../data/products";
 
 function SearchPage({ wishlist, cart, setIsCartOpen }) {
-  // State untuk menyimpan teks yang diketik pengguna
   const [searchTerm, setSearchTerm] = useState("");
-
-  // Menyaring (filter) produk berdasarkan teks pencarian
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
     <div className="bg-white min-h-screen text-gray-800">
-      {/* Pastikan Navbar menerima semua props */}
       <Navbar wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />
 
       <div className="max-w-[1400px] mx-auto px-6 py-12">
-        {/* Header & Input Search */}
         <div className="text-center mb-16 mt-4">
           <div className="max-w-md mx-auto relative">
             <input

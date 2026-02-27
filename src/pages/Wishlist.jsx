@@ -23,23 +23,21 @@ function WishlistPage({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
         {/* Jika Wishlist Kosong */}
         {wishlist.length === 0 ? (
           <div className="text-center py-20">
-  <p className="text-sm text-gray-400 font-light tracking-wide mb-6">
-    Your wishlist is currently empty.
-  </p>
+            <p className="text-sm text-gray-400 font-light tracking-wide mb-6">
+              Your wishlist is currently empty.
+            </p>
 
-  <Link
-    to="/"
-    className="border-b border-black text-[10px] tracking-[0.2em] uppercase pb-1 hover:text-gray-500 hover:border-gray-500 transition"
-  >
-    Continue Shopping
-  </Link>
-</div>
+            <Link
+              to="/"
+              className="border-b border-black text-[10px] tracking-[0.2em] uppercase pb-1 hover:text-gray-500 hover:border-gray-500 transition"
+            >
+              Continue Shopping
+            </Link>
+          </div>
         ) : (
-          /* Jika Ada Produk di Wishlist */
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
             {wishlist.map((product) => (
               <div key={product.id} className="group relative">
-                {/* Gambar Produk */}
                 <div className="aspect-[3/4] overflow-hidden bg-gray-50 relative">
                   <Link to={`/product/${product.id}`}>
                     <img
@@ -49,7 +47,6 @@ function WishlistPage({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
                     />
                   </Link>
 
-                  {/* Tombol Hapus (Icon Silang) */}
                   <button
                     onClick={() => toggleWishlist(product)}
                     className="absolute top-4 right-4 bg-white/90 p-2 rounded-full shadow-sm hover:bg-black hover:text-white transition-all duration-300"
@@ -81,7 +78,6 @@ function WishlistPage({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
                     Rp {product.price.toLocaleString("id-ID")}
                   </p>
 
-                  {/* TOMBOL ADD TO CART */}
                   <Link
                     to={`/product/${product.id}`}
                     className="block w-full bg-black text-white py-3 mt-4 rounded-full text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-gray-800 transition-colors duration-300"

@@ -25,7 +25,6 @@ function ForgotPasswordPage({ wishlist, cart, setIsCartOpen }) {
 
       <div className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-
           <h1 className="text-3xl mb-6 text-center">Reset Password</h1>
 
           {message && (
@@ -51,7 +50,6 @@ function ForgotPasswordPage({ wishlist, cart, setIsCartOpen }) {
               Send Reset Link
             </button>
           </form>
-
         </div>
       </div>
     </div>

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom"; // . Tambah useLocation
 import Navbar from "../components/layout/Navbar";
 
-function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
+function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
   const navigate = useNavigate();
   const location = useLocation(); // . Panggil useLocation
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +27,9 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
     ) {
       setError("");
       setIsLoggedIn(true);
-      
+
       // . Kembali ke Checkout
-      navigate(fromPath); 
+      navigate(fromPath);
     } else {
       setError("Email atau password salah");
     }
@@ -41,7 +41,6 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
 
       <div className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-
           {/* TITLE */}
           <div className="text-center mb-10">
             <h1 className="text-4xl tracking-wide mb-6">Login</h1>
@@ -50,7 +49,7 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
               {/* . INI KUNCINYA: Bawa memori ke RegisterPage! */}
               <Link
                 to="/register"
-                state={{ returnTo: fromPath }} 
+                state={{ returnTo: fromPath }}
                 className="underline hover:text-black transition-colors"
               >
                 Sign up
@@ -69,10 +68,9 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
               </button>
             </div>
           )}
-          
+
           {/* FORM */}
           <form onSubmit={handleSignIn} className="space-y-6">
-
             <input
               type="email"
               placeholder="Email"
@@ -107,7 +105,6 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }){
             >
               {isLoading ? "Loading..." : "Login"}
             </button>
-
           </form>
         </div>
       </div>

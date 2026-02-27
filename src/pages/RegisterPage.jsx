@@ -4,22 +4,15 @@ import Navbar from "../components/layout/Navbar";
 
 function RegisterPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
   const navigate = useNavigate();
-  const location = useLocation(); // . Panggil useLocation
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // . Tangkap pesan dari halaman Login. Kalau kosong, arahkan ke "/account"
   const fromPath = location.state?.returnTo || "/account";
-
   const handleRegister = (e) => {
     e.preventDefault();
-
     const user = { email, password, orders: [] };
-
     localStorage.setItem("user", JSON.stringify(user));
     setIsLoggedIn(true);
-    
-    // . Lempar ke Checkout jika asalnya dari Checkout
     navigate(fromPath);
   };
 
@@ -29,13 +22,15 @@ function RegisterPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
 
       <div className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-
           <div className="text-center mb-10">
             <h1 className="text-4xl tracking-wide mb-3">Sign Up</h1>
             <p className="text-sm text-gray-500">
               Already have an account?{" "}
-              {/* . Oper pesan kembali ke Login kalau user iseng klik ini */}
-              <Link to="/login" state={{ returnTo: fromPath }} className="underline hover:text-black">
+              <Link
+                to="/login"
+                state={{ returnTo: fromPath }}
+                className="underline hover:text-black"
+              >
                 Login
               </Link>
             </p>
@@ -67,7 +62,6 @@ function RegisterPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
               Create Account
             </button>
           </form>
-
         </div>
       </div>
     </div>
