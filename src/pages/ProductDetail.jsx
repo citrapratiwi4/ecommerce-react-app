@@ -14,12 +14,12 @@ function ProductDetail({
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id));
 
-  // Scroll to top when component mounts
+  // Initialize scroll position
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // States
+  // Component states
   const [selectedVariant, setSelectedVariant] = useState(
     product?.variants && product.variants.length > 0
       ? product.variants[0]
@@ -37,6 +37,7 @@ function ProductDetail({
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const scrollRef = useRef(null);
 
+  // Auto-slide functionality for mobile gallery
   useEffect(() => {
     const autoSlide = setInterval(() => {
       if (scrollRef.current) {
@@ -76,6 +77,7 @@ function ProductDetail({
       ? ["36", "37", "38", "39", "40"]
       : ["S", "M", "L", "XL"]);
   const hasSizes = availableSizes && availableSizes.length > 0;
+  
   const toggleAccordion = (section) => {
     setOpenAccordion(openAccordion === section ? null : section);
   };
@@ -84,11 +86,14 @@ function ProductDetail({
     <div className="bg-white min-h-screen text-gray-800">
       <Navbar wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />
 
-      {/* CONTAINER UTAMA */}
-      <div className="w-full px-5 md:px-6 lg:px-12 pb-16 pt-6 md:pt-10">
+      {/* Main Container */}
+      <div className="w-full max-w-[1400px] mx-auto px-5 md:px-6 lg:px-12 pb-16 pt-6 md:pt-10">
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-14 items-start">
-          {/* ================= BAGIAN GALERI FOTO ================= */}
+          
+          {/* Product Gallery Section */}
           <div className="w-full lg:flex-1">
+            
+            {/* Mobile Gallery View */}
             <div className="lg:hidden relative w-full">
               <div
                 ref={scrollRef}
@@ -113,7 +118,7 @@ function ProductDetail({
                 ))}
               </div>
 
-              {/* Indikator Titik (Dots) untuk Mobile */}
+              {/* Mobile Pagination Dots */}
               {galleryImages.length > 1 && (
                 <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 pointer-events-none">
                   {galleryImages.map((_, index) => (
@@ -126,9 +131,9 @@ function ProductDetail({
               )}
             </div>
 
-            {/* 2. TAMPILAN DESKTOP (Thumbnails Kiri, Gambar Utama Kanan) - Tersembunyi di Mobile */}
+            {/* Desktop Gallery View */}
             <div className="hidden lg:flex w-full gap-6">
-              {/* Thumbnails */}
+              {/* Image Thumbnails */}
               <div className="flex flex-col gap-4 w-[80px] shrink-0 sticky top-32">
                 {galleryImages?.map((img, index) => (
                   <img
@@ -141,7 +146,7 @@ function ProductDetail({
                 ))}
               </div>
 
-              {/* Gambar Utama Desktop */}
+              {/* Main Image Preview */}
               <div className="flex-1 w-full relative">
                 {isSoldOut && (
                   <div className="absolute top-4 left-4 bg-white/90 text-red-800 text-[10px] font-bold tracking-[0.2em] px-4 py-2 uppercase z-10 shadow-sm">
@@ -156,9 +161,8 @@ function ProductDetail({
               </div>
             </div>
           </div>
-          {/* ================= AKHIR BAGIAN GALERI ================= */}
 
-          {/* 3. KANAN - INFO */}
+          {/* Product Information Section */}
           <div className="w-full lg:w-[420px] shrink-0 sticky top-32 mt-4 md:mt-0">
             <h1 className="text-3xl md:text-6xl font-light text-black mb-2 md:mb-6">
               {product.name}
@@ -167,7 +171,7 @@ function ProductDetail({
               Rp {product.price.toLocaleString("id-ID")}
             </p>
 
-            {/* RATINGS */}
+            {/* Product Ratings */}
             {product.rating && (
               <div className="flex items-center gap-2 mb-6 md:mb-4">
                 <div className="flex text-yellow-400 text-[14px] md:text-[16px] tracking-[0.1em]">
@@ -187,7 +191,7 @@ function ProductDetail({
               </div>
             )}
 
-            {/* URGENCY */}
+            {/* Stock Urgency Indicator */}
             {product.stock > 0 && product.stock <= 3 && (
               <div className="flex items-center gap-2 text-red-600 mb-6 text-xs md:text-sm font-medium">
                 <svg
@@ -207,7 +211,7 @@ function ProductDetail({
               </div>
             )}
 
-            {/* VARIANTS */}
+            {/* Product Variants */}
             {hasVariants && (
               <div className="mb-6 md:mb-8">
                 <p className="text-xs md:text-sm text-gray-700 mb-3">
@@ -247,7 +251,7 @@ function ProductDetail({
               </div>
             )}
 
-            {/* SIZE & SIZE GUIDE */}
+            {/* Size Selection */}
             {hasSizes && (
               <div className="mb-8">
                 <div className="flex items-center gap-6 mb-3">
@@ -286,7 +290,7 @@ function ProductDetail({
               </div>
             )}
 
-            {/* ACTION BUTTONS */}
+            {/* Primary Actions */}
             <div className="flex items-center gap-3 md:gap-4 mb-8 md:mb-10">
               <button
                 disabled={isSoldOut || (hasSizes && !selectedSize)}
@@ -326,7 +330,7 @@ function ProductDetail({
               </button>
             </div>
 
-            {/* ACCORDION */}
+            {/* Product Details Accordion */}
             <div className="mt-8 md:mt-10 border-t border-gray-200">
               <div className="border-b border-gray-200">
                 <button
@@ -377,7 +381,7 @@ function ProductDetail({
               </div>
             </div>
 
-            {/* INFO SECTION */}
+            {/* Shipping Info */}
             <div className="mt-6 md:mt-8 space-y-2 md:space-y-3 text-xs md:text-sm text-gray-600">
               <p className="flex items-center gap-2">
                 <span className="text-black">✓</span> Free shipping over Rp
@@ -390,7 +394,7 @@ function ProductDetail({
           </div>
         </div>
 
-        {/* CUSTOMER REVIEWS SECTION */}
+        {/* Customer Reviews Section */}
         <div
           id="reviews"
           className="mt-20 md:mt-32 pt-12 md:pt-16 border-t border-gray-200 max-w-3xl mx-auto"
@@ -471,7 +475,7 @@ function ProductDetail({
         </div>
       </div>
 
-      {/* BRAND STATEMENT */}
+      {/* Brand Statement */}
       <section className="py-20 md:py-32 border-t border-gray-50 text-center">
         <div className="max-w-xl mx-auto px-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-6 md:mb-8">
@@ -485,77 +489,71 @@ function ProductDetail({
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-200 py-16 md:py-20">
+      {/* Global Footer - Left-aligned layout mapping exactly to Home.jsx */}
+      <footer className="bg-white border-t border-gray-200 py-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16 text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div>
-              <h4 className="text-lg md:text-xl font-medium tracking-[0.15em] uppercase mb-4 md:mb-6">
+              <h4 className="text-xl font-medium tracking-[0.15em] uppercase mb-6">
                 Élanora
               </h4>
-              <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Timeless silhouettes designed with simplicity, shaped by
                 elegance, and crafted to last.
               </p>
             </div>
+
             <div>
-              <h5 className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-400 mb-4 md:mb-6">
+              <h5 className="text-xs tracking-[0.25em] uppercase text-gray-400 mb-6">
                 Shop
               </h5>
-              <ul className="space-y-3 text-xs md:text-sm text-gray-600">
-                <li>
-                  <Link to="/category/dress" className="hover:text-black">
-                    Dress
-                  </Link>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="hover:text-black cursor-pointer">
+                  <Link to="/category/dress" className="hover:text-black">Dress</Link>
                 </li>
-                <li>
-                  <Link to="/category/skirt" className="hover:text-black">
-                    Skirt
-                  </Link>
+                <li className="hover:text-black cursor-pointer">
+                  <Link to="/category/skirt" className="hover:text-black">Skirt</Link>
                 </li>
-                <li>
-                  <Link to="/category/blazer" className="hover:text-black">
-                    Blazer
-                  </Link>
+                <li className="hover:text-black cursor-pointer">
+                  <Link to="/category/blazer" className="hover:text-black">Blazer</Link>
                 </li>
-                <li>
-                  <Link to="/category/footwear" className="hover:text-black">
-                    Footwear
-                  </Link>
+                <li className="hover:text-black cursor-pointer">
+                  <Link to="/category/footwear" className="hover:text-black">Footwear</Link>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h5 className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-400 mb-4 md:mb-6">
+              <h5 className="text-xs tracking-[0.25em] uppercase text-gray-400 mb-6">
                 Customer Care
               </h5>
-              <ul className="space-y-3 text-xs md:text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-gray-600">
                 <li className="hover:text-black cursor-pointer">Contact Us</li>
-                <li className="hover:text-black cursor-pointer">
-                  Shipping & Returns
-                </li>
+                <li className="hover:text-black cursor-pointer">Shipping & Returns</li>
                 <li className="hover:text-black cursor-pointer">Size Guide</li>
                 <li className="hover:text-black cursor-pointer">FAQ</li>
               </ul>
             </div>
+
             <div>
-              <h5 className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-400 mb-4 md:mb-6">
+              <h5 className="text-xs tracking-[0.25em] uppercase text-gray-400 mb-6">
                 Follow
               </h5>
-              <ul className="space-y-3 text-xs md:text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-gray-600">
                 <li className="hover:text-black cursor-pointer">Instagram</li>
                 <li className="hover:text-black cursor-pointer">Tiktok</li>
                 <li className="hover:text-black cursor-pointer">Facebook</li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-200 pt-6 md:pt-8 text-center text-[10px] md:text-xs text-gray-400 tracking-wide">
+
+          <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400 tracking-wide">
             © {new Date().getFullYear()} Élanora. All rights reserved.
           </div>
         </div>
       </footer>
 
-      {/* MODAL SIZE GUIDE */}
+      {/* Size Guide Modal */}
       {isSizeGuideOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity duration-300">
           <div className="bg-white w-full max-w-2xl p-6 md:p-12 relative shadow-2xl">
@@ -686,12 +684,7 @@ function ProductDetail({
                       { size: "S", b: "84 - 88", w: "66 - 70", h: "90 - 94" },
                       { size: "M", b: "89 - 93", w: "71 - 75", h: "95 - 99" },
                       { size: "L", b: "94 - 98", w: "76 - 80", h: "100 - 104" },
-                      {
-                        size: "XL",
-                        b: "99 - 103",
-                        w: "81 - 85",
-                        h: "105 - 109",
-                      },
+                      { size: "XL", b: "99 - 103", w: "81 - 85", h: "105 - 109" },
                     ].map((row, i) => (
                       <tr
                         key={i}
