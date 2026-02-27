@@ -48,18 +48,15 @@ This project demonstrates a complete frontend e-commerce flow featuring:
 
 ---
 
-##  Project Structure
+## Project Structure
 
-A clean and organized file structure for scalability and maintainability:
-
-```text
 src/
-├── assets/        # Static files (images, global CSS)
-├── components/    # Reusable UI components (Navbar, CartDrawer)
-├── context/       # React Context API for global state management
-├── data/          # Local JSON/JS data (Product database)
-├── pages/         # Route components (Home, ProductDetail, Category)
-└── App.jsx        # Main application router and state provider
+├── assets/
+├── components/
+├── context/
+├── data/
+├── pages/
+└── App.jsx
 
 
 ---
