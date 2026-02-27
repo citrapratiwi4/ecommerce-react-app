@@ -1,7 +1,6 @@
 // src/pages/ProductDetail.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-
 import Navbar from "../components/layout/Navbar";
 import { products } from "../data/products";
 
@@ -30,6 +29,30 @@ function ProductDetail({ wishlist, toggleWishlist, addToCart, cart, setIsCartOpe
   
   const [openAccordion, setOpenAccordion] = useState("description");
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+
+  // --- FITUR AUTO SLIDE UNTUK HP ---
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    // Mengatur timer untuk geser setiap 1500 milidetik (1,5 detik)
+    const autoSlide = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        
+        // Jika sudah sampai mentok di gambar paling kanan, kembali ke awal (kiri)
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          // Jika belum mentok, geser ke gambar selanjutnya
+          scrollRef.current.scrollTo({ left: scrollLeft + clientWidth, behavior: "smooth" });
+        }
+      }
+    }, 3000); // Angka 3000 bisa kamu ganti (misal 2000 untuk 2 detik)
+
+    // Membersihkan timer jika halaman ditutup
+    return () => clearInterval(autoSlide);
+  }, []);
+  // ---------------------------------
 
   if (!product)
     return (
@@ -66,36 +89,75 @@ function ProductDetail({ wishlist, toggleWishlist, addToCart, cart, setIsCartOpe
       <div className="w-full px-5 md:px-6 lg:px-12 pb-16 pt-6 md:pt-10">
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-14 items-start">
           
-          {/* 1. KIRI - GALLERY THUMBNAILS (Hanya Desktop) */}
-          <div className="hidden lg:flex flex-col gap-4 w-[80px] shrink-0 sticky top-32">
-            {galleryImages?.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt="thumb"
-                onClick={() => setSelectedImage(img)}
-                className={`w-full h-[110px] object-cover cursor-pointer border transition ${selectedImage === img ? "border-black" : "border-transparent opacity-60 hover:opacity-100"}`}
-              />
-            ))}
-          </div>
+          {/* ================= BAGIAN GALERI FOTO ================= */}
+          <div className="w-full lg:flex-1">
+            
+            {/* 1. TAMPILAN MOBILE (Swipeable Slider) - Tersembunyi di Desktop */}
+            <div className="lg:hidden relative w-full">
+              <div 
+  ref={scrollRef} 
+  className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full">
+                {galleryImages?.map((img, index) => (
+                  <div key={index} className="w-full flex-shrink-0 snap-center relative">
+                    {isSoldOut && (
+                      <div className="absolute top-4 left-4 bg-white/90 text-red-800 text-[10px] font-bold tracking-[0.2em] px-4 py-2 uppercase z-10 shadow-sm">
+                        Sold Out
+                      </div>
+                    )}
+                    <img
+                      src={img}
+                      alt={`${product.name} ${index + 1}`}
+                      className={`w-full h-auto aspect-[3/4] object-cover bg-gray-50 ${isSoldOut ? 'opacity-90' : ''}`}
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {/* Indikator Titik (Dots) untuk Mobile */}
+              {galleryImages.length > 1 && (
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 pointer-events-none">
+                  {galleryImages.map((_, index) => (
+                    <div key={index} className="w-1.5 h-1.5 rounded-full bg-black/40"></div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          {/* 2. TENGAH - MAIN IMAGE */}
-          <div className="flex-1 w-full relative">
-             {isSoldOut && (
-               <div className="absolute top-4 left-4 bg-white/90 text-red-800 text-[10px] font-bold tracking-[0.2em] px-4 py-2 uppercase z-10 shadow-sm">
-                 Sold Out
-               </div>
-             )}
-            <img
-              src={selectedImage}
-              alt={product.name}
-              className={`w-full h-auto object-cover ${isSoldOut ? 'opacity-90' : ''}`}
-            />
+            {/* 2. TAMPILAN DESKTOP (Thumbnails Kiri, Gambar Utama Kanan) - Tersembunyi di Mobile */}
+            <div className="hidden lg:flex w-full gap-6">
+              {/* Thumbnails */}
+              <div className="flex flex-col gap-4 w-[80px] shrink-0 sticky top-32">
+                {galleryImages?.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt="thumb"
+                    onClick={() => setSelectedImage(img)}
+                    className={`w-full h-[110px] object-cover cursor-pointer border transition ${selectedImage === img ? "border-black" : "border-transparent opacity-60 hover:opacity-100"}`}
+                  />
+                ))}
+              </div>
+
+              {/* Gambar Utama Desktop */}
+              <div className="flex-1 w-full relative">
+                 {isSoldOut && (
+                   <div className="absolute top-4 left-4 bg-white/90 text-red-800 text-[10px] font-bold tracking-[0.2em] px-4 py-2 uppercase z-10 shadow-sm">
+                     Sold Out
+                   </div>
+                 )}
+                <img
+                  src={selectedImage}
+                  alt={product.name}
+                  className={`w-full h-auto object-cover transition-opacity duration-300 ${isSoldOut ? 'opacity-90' : ''}`}
+                />
+              </div>
+            </div>
           </div>
+          {/* ================= AKHIR BAGIAN GALERI ================= */}
           
           {/* 3. KANAN - INFO */}
           <div className="w-full lg:w-[420px] shrink-0 sticky top-32 mt-4 md:mt-0">
-            {/* . PERBAIKAN: Nama produk dan harga diturunkan ukurannya di HP */}
+            {/* Nama produk dan harga diturunkan ukurannya di HP */}
             <h1 className="text-3xl md:text-6xl font-light text-black mb-2 md:mb-6">{product.name}</h1>
             <p className="text-lg md:text-2xl text-gray-700 mb-6 md:mb-4">
               Rp {product.price.toLocaleString("id-ID")}
@@ -271,12 +333,10 @@ function ProductDetail({ wishlist, toggleWishlist, addToCart, cart, setIsCartOpe
         </div>
 
         {/* CUSTOMER REVIEWS SECTION */}
-        {/* . PERBAIKAN: Padding dan Margin dirapatkan di HP */}
         <div id="reviews" className="mt-20 md:mt-32 pt-12 md:pt-16 border-t border-gray-200 max-w-3xl mx-auto">
           <h3 className="text-lg md:text-xl font-light tracking-[0.15em] uppercase mb-8 md:mb-12 text-center">Reviews</h3>
           
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12 md:mb-16">
-            {/* . PERBAIKAN: Angka rating diturunkan ukurannya di HP (text-4xl) */}
             <div className="text-4xl md:text-5xl font-light text-black">{product.rating || "4.8"}</div>
             <div className="flex flex-col items-center md:items-start">
               <div className="text-yellow-400 tracking-[0.2em] text-base md:text-lg mb-1">★★★★★</div>
@@ -320,7 +380,6 @@ function ProductDetail({ wishlist, toggleWishlist, addToCart, cart, setIsCartOpe
       </div>
 
       {/* BRAND STATEMENT */}
-      {/* . PERBAIKAN: Padding dirapatkan, font diturunkan jadi text-base di HP */}
       <section className="py-20 md:py-32 border-t border-gray-50 text-center">
         <div className="max-w-xl mx-auto px-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-6 md:mb-8">Élanora Studio</p>

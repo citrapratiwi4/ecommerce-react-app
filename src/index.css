@@ -7,3 +7,11 @@
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
+/* Sembunyikan Scrollbar untuk Slider Gambar di HP */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -29,11 +29,17 @@ function Home({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
       <Navbar wishlist={wishlist} cart={cart} setIsCartOpen={setIsCartOpen} />
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}></div>
-        <div className="absolute inset-0 bg-black/40"></div>
+      {/* PERBAIKAN 1: Tinggi di HP sedikit dikurangi (h-[80vh]) agar tidak terlalu memaksa gambar memanjang, di Desktop tetap (md:h-[90vh]) */}
+      <section className="relative h-[80vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
+        
+        {/* PERBAIKAN 2: Fokus gambar digeser. Di HP fokus ke kiri (bg-[position:25%_center]), di Desktop kembali ke tengah (md:bg-center) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-[position:25%_center] md:bg-center transition-all duration-500" 
+          style={{ backgroundImage: `url(${banner})` }}
+        ></div>
+        
+        <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative z-10 text-center text-white px-4 md:px-8 w-full max-w-5xl mx-auto">
-          {/* Teks dikecilkan ke text-4xl untuk HP */}
           <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[7rem] font-light tracking-[0.1em] md:tracking-[0.08em] uppercase leading-tight md:leading-none mb-4 md:mb-6">
             ÉLANORA
           </h2>
@@ -60,14 +66,15 @@ function Home({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
 
       {/* ================= NEW COLLECTION ================= */}
       <section id="catalog" className="py-10 md:py-12">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-5">
+        {/* PERBAIKAN 1: px-4 diubah jadi px-2 agar margin pinggir layar HP lebih tipis */}
+        <div className="max-w-[1400px] mx-auto px-2 md:px-5">
           <div className="text-center mb-8">
             <h3 className="text-xl md:text-3xl font-light tracking-wide mb-4">New Collection</h3>
             <div className="w-12 md:w-16 h-[1px] bg-black mx-auto"></div>
           </div>
 
-          {/* Di-KUNCI 2 Kolom untuk HP (grid-cols-2) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 md:gap-x-8 gap-y-10 md:gap-y-16">
+          {/* PERBAIKAN 2: gap-x-3 diubah jadi gap-x-1.5 agar jarak antar foto lebih rapat ala This Is April */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-1.5 md:gap-x-8 gap-y-8 md:gap-y-16">
             {(() => {
               const displayProducts = [
                 ...products.filter(p => p.category === "Dress").slice(0, 2),
@@ -77,30 +84,30 @@ function Home({ wishlist, toggleWishlist, cart, setIsCartOpen }) {
               return displayProducts.map((item) => (
                 <div key={item.id} className="group relative">
                   
-                  {/* Area sentuh diperlebar dengan padding (p-2) agar ramah jempol */}
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       toggleWishlist(item);
                     }}
-                    className="absolute top-1 right-1 md:top-3 md:right-3 z-20 p-2"
+                    className="absolute top-2 right-2 md:top-3 md:right-3 z-20 p-2 bg-white/80 rounded-full shadow-sm md:bg-transparent md:shadow-none"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={wishlist.find((w) => w.id === item.id) ? "#dc2626" : "none"} stroke={wishlist.find((w) => w.id === item.id) ? "#dc2626" : "black"} strokeWidth="1.5" className="w-5 h-5 md:w-6 md:h-6 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={wishlist.find((w) => w.id === item.id) ? "#dc2626" : "none"} stroke={wishlist.find((w) => w.id === item.id) ? "#dc2626" : "black"} strokeWidth="1.5" className="w-4 h-4 md:w-6 md:h-6 transition">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-6.716-4.03-9-8.25C1.716 9.38 3.716 6 7.25 6c2.02 0 3.44 1.21 4.75 2.94C13.31 7.21 14.73 6 16.75 6 20.284 6 22.284 9.38 21 12.75 18.716 16.97 12 21 12 21z" />
                     </svg>
                   </button>
 
                   <Link to={`/product/${item.id}`} className="block">
-                    {/* Tinggi gambar dipendekkan di HP (h-[220px]) agar tidak kepanjangan */}
-                    <div className="relative w-full h-[220px] sm:h-[300px] md:h-[450px] overflow-hidden bg-gray-100">
+                    {/* PERBAIKAN 3: h-[220px] DIHAPUS, diganti dengan aspect-[4/5] agar tingginya proporsional dan otomatis menyesuaikan lebar layar HP */}
+                    <div className="relative w-full aspect-[4/5] md:h-[450px] overflow-hidden bg-gray-100">
                       <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out md:group-hover:opacity-0" />
                       <img src={item.hoverImage || item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-in-out md:group-hover:opacity-100 md:group-hover:scale-105" />
                     </div>
                     
-                    <div className="mt-3 md:mt-5 space-y-1 md:space-y-2 text-center">
-                      <h4 className="text-[9px] md:text-xs font-normal tracking-[0.1em] md:tracking-[0.15em] uppercase text-gray-600 truncate px-1">{item.name}</h4>
-                      <p className="text-[11px] md:text-sm font-light text-gray-500">Rp {item.price.toLocaleString("id-ID")}</p>
+                    <div className="mt-3 md:mt-5 space-y-1 md:space-y-2 text-center px-1">
+                      {/* PERBAIKAN 4: Ukuran font judul dinaikkan sedikit dari text-[9px] jadi text-[10px] agar lebih terbaca */}
+                      <h4 className="text-[10px] md:text-xs font-medium tracking-[0.1em] md:tracking-[0.15em] uppercase text-gray-800 truncate">{item.name}</h4>
+                      <p className="text-xs md:text-sm font-light text-gray-500">Rp {item.price.toLocaleString("id-ID")}</p>
                     </div>
                   </Link>
 
