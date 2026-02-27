@@ -43,3 +43,38 @@ src/
 ├── data/          # Local JSON/JS data (Product database)
 ├── pages/         # Route components (Home, ProductDetail, Category)
 └── App.jsx        # Main application router and state provider
+
+📦 Installation & Setup
+To run this project locally, follow ini steps:
+
+Clone the repository
+
+Bash
+git clone [https://github.com/citrapratiwi4/ecommerce-react-app.git](https://github.com/citrapratiwi4/ecommerce-react-app.git)
+Navigate to the project directory
+
+Bash
+cd ecommerce-react-app
+Install dependencies
+
+Bash
+npm install
+Run the development server
+
+Bash
+npm run dev
+📌 Requirements Fulfilled
+[x] React 18+ (Utilizing React 19 features)
+
+[x] Vite as the primary build tool for fast HMR
+
+[x] React Router DOM for seamless client-side routing
+
+[x] Tailwind CSS for utility-first, responsive styling
+
+[x] Meaningful Git Commits & Organized File Structure
+
+[x] Working Deployed Link via Vercel
+
+👩‍💻 Author
+Citra Pratiwi Final Project – Web Development Pathway
