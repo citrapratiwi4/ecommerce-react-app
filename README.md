@@ -44,6 +44,7 @@ src/
 ├── pages/         # Route components (Home, ProductDetail, Category)
 └── App.jsx        # Main application router and state provider
 
+
 ## 📦 Installation & Setup
 To run this project locally, follow ini steps:
 
