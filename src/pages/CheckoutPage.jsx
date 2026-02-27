@@ -360,6 +360,12 @@ function CheckoutPage({ cart, checkoutAction, isLoggedIn, shippingCost, setShipp
                   {appliedDiscountCode !== "" ? "Applied" : "Apply"}
                 </button>
               </div>
+              {/* Teks Bantuan Kode Promo */}
+              {!appliedDiscountCode && !discountMessage.text && (
+                <p className="text-[10px] text-gray-400 mt-2 tracking-wide">
+                  Use code <span className="font-semibold text-gray-800">ELANORA20</span> to get 20% off your order!
+                </p>
+              )}
               
               {discountMessage.text && (
                 <p className={`text-xs mt-3 ${discountMessage.type === "success" ? "text-green-600 font-medium" : "text-red-500"}`}>
