@@ -2,7 +2,7 @@
 
 > A sophisticated, responsive e-commerce web application built with modern React. Developed as the Final Project for the Web Development Pathway, focusing on seamless UI/UX and high-performance architecture.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-success?style=for-the-badge&logo=vercel)](https://MASUKKAN_LINK_VERCEL_KAMU_DISINI.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-success?style=for-the-badge&logo=vercel)](https://fashion-store-xi-seven.vercel.app/)
 
 ## 📖 Project Overview
 
