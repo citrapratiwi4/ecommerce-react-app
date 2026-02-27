@@ -1,93 +1,99 @@
-🌟 ÉLANORA — PREMIUM FASHION E-COMMERCE
+# 🌟 Élanora - Premium Fashion E-Commerce
 
-A sophisticated, responsive e-commerce web application built with modern React. Developed as the Final Project for the Web Development Pathway, focusing on seamless UI/UX and high-performance architecture.
+A sophisticated, responsive e-commerce web application built with modern React.  
+Developed as the Final Project for the Web Development Pathway, focusing on seamless UI/UX and high-performance architecture.
 
-📖 PROJECT OVERVIEW
+[Live Demo](https://fashion-store-xi-seven.vercel.app/)
 
-Élanora is a modern fashion storefront designed with "Timeless Elegance" in mind.
-This project demonstrates a complete frontend e-commerce flow, featuring:
+---
 
-Component-based architecture
+## Project Overview
 
-Dynamic routing
+Élanora is a modern fashion storefront designed with "Timeless Elegance" in mind.  
+This project demonstrates a complete frontend e-commerce flow featuring:
 
-Mobile-first responsive design
+- Component-based architecture
+- Dynamic routing
+- Mobile-first responsive design
+- Optimized experience for desktop and mobile devices
 
-It is optimized for both desktop and mobile devices, ensuring a premium shopping experience across all screen sizes.
+---
 
-🚀 KEY FEATURES
-🛍️ CORE FUNCTIONALITY
+## Key Features
 
-Dynamic Product Catalog: Filterable and sortable product listings by category (Dress, Skirt, Blazer, Footwear).
+### Core Functionality
 
-Comprehensive Product Details: In-depth product pages featuring size guides, variant selections, and accordion-based descriptions.
+- Dynamic Product Catalog (Filter & Sort by category)
+- Detailed Product Pages with variant and image gallery
+- Add to Cart & Wishlist (Global State Management)
+- Promo Code System (e.g., ELANORA20)
+- Interactive Cart Drawer with real-time calculation
 
-State Management: Seamless Add-to-Cart and Wishlist functionality across the application.
+### UI/UX Highlights
 
-Interactive Promo Code System: Integrated discount voucher system allowing users to apply promo codes (e.g., ELANORA20) for real-time price deductions during checkout.
+- Mobile-First Responsive Layout
+- Swipeable Auto-Slide Product Gallery
+- Smooth animations and hover effects
+- Scroll-to-View navigation
 
-Interactive Cart Drawer: Real-time cart calculation and checkout simulation.
+---
 
-✨ UI/UX HIGHLIGHTS
+## Tech Stack
 
-Mobile-First Responsive Design: Fluid layouts using Tailwind CSS Grid and Flexbox.
+- React 19
+- React Router DOM 7
+- Tailwind CSS 4
+- Vite 7
+- Vercel (Deployment)
 
-Auto-Slide Touch Gallery: Custom-built, swipeable product image gallery with auto-play functionality for mobile users.
+---
 
-Premium Animations: Smooth transitions, hover effects, and modal popups.
-
-Scroll-to-View Navigation: Enhanced user journey with smooth anchor scrolling.
-
-🛠 TECH STACK
-
-Framework: React 19
-
-Routing: React Router DOM 7
-
-Styling: Tailwind CSS 4
-
-Build Tool: Vite 7
-
-Deployment: Vercel
-
-📂 PROJECT STRUCTURE
-
-A clean and organized file structure for scalability and maintainability:
+## Project Structure
 
 src/
-├── assets/        # Static files (images, global CSS)
-├── components/    # Reusable UI components (Navbar, CartDrawer)
-├── context/       # React Context API for global state management
-├── data/          # Local JSON/JS data (Product database)
-├── pages/         # Route components (Home, ProductDetail, Category)
-└── App.jsx        # Main application router and state provider
-📦 INSTALLATION & SETUP
+├── assets/
+├── components/
+├── context/
+├── data/
+├── pages/
+└── App.jsx
 
-To run this project locally, follow these steps:
 
-1️⃣ Clone the repository
+---
+
+## Installation & Setup
+
+Clone the repository:
 git clone https://github.com/citrapratiwi4/ecommerce-react-app.git
-2️⃣ Navigate to the project directory
+
+
+Navigate to the folder:
 cd ecommerce-react-app
-3️⃣ Install dependencies
+
+Install dependencies:
 npm install
-4️⃣ Run the development server
+
+
+Run development server:
 npm run dev
-📌 REQUIREMENTS FULFILLED
 
- React 18+ (Utilizing React 19 features)
 
- Vite as the primary build tool for fast HMR
+---
 
- React Router DOM for seamless client-side routing
+## Requirements Fulfilled
 
- Tailwind CSS for utility-first, responsive styling
+- React 18+
+- Vite build tool
+- React Router DOM
+- Tailwind CSS
+- Organized file structure
+- Deployed via Vercel
 
- Meaningful Git Commits & Organized File Structure
+---
 
- Working Deployed Link via Vercel
+## Author
 
-👩‍💻 AUTHOR
-
-Citra Pratiwi
+Citra Pratiwi  
 Final Project – Web Development Pathway
+
+
