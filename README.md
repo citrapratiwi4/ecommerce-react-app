@@ -51,12 +51,11 @@ This project demonstrates a complete frontend e-commerce flow featuring:
 ## Project Structure
 
 src/
-├── assets/
-├── components/
-├── context/
-├── data/
-├── pages/
-└── App.jsx
+├── assets/        # Static files (images, global CSS)
+├── components/    # Reusable UI components (Navbar, CartDrawer)
+├── data/          # Local JSON/JS data (Product database)
+├── pages/         # Route components (Home, ProductDetail, Category)
+└── App.jsx        # Main application router and state provider
 
 
 ---
