@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// . PERBAIKAN 1: Tambahkan discountAmount di dalam kurung kurawal ini
 function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
   const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState("idle"); // idle, processing, success
 
-  // . PERBAIKAN 2: Masukkan potongan diskon ke dalam rumus totalAmount
-  // Format: (Total Belanja) + (Ongkos Kirim) - (Total Diskon)
+  // Calculate final amount: (Subtotal) + (Shipping) - (Discount)
   const totalAmount = Math.max(
     0,
     cart.reduce((total, item) => total + item.price * item.quantity, 0) +
@@ -17,14 +15,14 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
       (discountAmount || 0),
   );
 
-  // Jika keranjang kosong, kembalikan ke home
+  // Redirect to home if cart is empty and no payment is processing
   useEffect(() => {
     if (cart.length === 0 && paymentStatus === "idle") {
       navigate("/");
     }
   }, [cart, paymentStatus, navigate]);
 
-  // Daftar Metode Pembayaran beserta logonya
+  // Payment Methods
   const methods = [
     {
       id: "bca",
@@ -32,7 +30,6 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
       logo: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg",
       appName: "m-BCA",
     },
-
     {
       id: "mandiri",
       name: "Mandiri Virtual Account",
@@ -41,48 +38,50 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
     },
   ];
 
-  // Fungsi saat tombol diklik
+  // Handle payment processing simulation
   const handleCheckStatus = () => {
     setPaymentStatus("processing");
 
     setTimeout(() => {
       setPaymentStatus("success");
 
-      // Tunggu sebentar agar animasi sukses terlihat oleh user
+      // Wait briefly to show the success animation before redirecting
       setTimeout(() => {
-        // 1. Eksekusi fungsi checkout untuk memindahkan data keranjang ke orders
+        // 1. Execute checkout action to clear cart and save to orders
         checkoutAction();
 
-        // 2. Redirect langsung ke halaman Success Page
+        // 2. Redirect to Success Page
         navigate("/success");
-      }, 2000); // Jeda 2 detik setelah muncul centang hijau
+      }, 2000); 
     }, 2000);
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-sans text-gray-800">
-      {/* KOTAK PAYMENT GATEWAY */}
+      {/* PAYMENT GATEWAY CONTAINER */}
       <div className="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden">
-        {/* ================= HEADER GELAP ================= */}
+        
+        {/* ================= DARK HEADER ================= */}
         <div className="bg-[#0e1726] p-6 text-white flex flex-col items-center justify-center relative">
           <div className="absolute top-5 left-5 text-xs font-bold tracking-widest text-gray-300">
             ÉLANORA
           </div>
           <p className="text-[10px] text-gray-400 mt-6 mb-1 tracking-widest uppercase">
-            TOTAL TAGIHAN
+            TOTAL AMOUNT
           </p>
           <h2 className="text-3xl font-semibold tracking-wide">
             Rp {totalAmount.toLocaleString("id-ID")}
           </h2>
         </div>
 
-        {/* ================= BODY KONTEN ================= */}
+        {/* ================= BODY CONTENT ================= */}
         <div className="p-8 min-h-[320px] flex flex-col justify-center">
-          {/* STATUS 1A: MEMILIH METODE PEMBAYARAN */}
+          
+          {/* STATUS 1: SELECT PAYMENT METHOD */}
           {paymentStatus === "idle" && !selectedMethod && (
             <div className="animate-fade-in flex flex-col h-full">
               <h3 className="text-xs font-bold text-gray-500 mb-4 tracking-widest uppercase">
-                PILIH METODE PEMBAYARAN
+                SELECT PAYMENT METHOD
               </h3>
 
               <div className="space-y-3 mb-6">
@@ -90,7 +89,8 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
                   <button
                     key={method.id}
                     onClick={() => setSelectedMethod(method)}
-                    className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50/30 transition text-left"
+                    // Applied rounded-sm for input/selection elements consistency
+                    className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-sm hover:border-blue-500 hover:bg-blue-50/30 transition text-left"
                   >
                     <span className="text-sm font-medium text-gray-800">
                       {method.name}
@@ -108,14 +108,15 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
                 onClick={() => navigate("/checkout")}
                 className="mt-auto text-xs text-center text-gray-400 hover:text-gray-700 transition"
               >
-                ← Kembali ke Halaman Checkout
+                ← Return to Checkout
               </button>
             </div>
           )}
 
+          {/* STATUS 2: METHOD SELECTED, WAITING FOR PAYMENT */}
           {paymentStatus === "idle" && selectedMethod && (
             <div className="animate-fade-in flex flex-col h-full">
-              {/* Header Bank Terpilih */}
+              {/* Selected Bank Header */}
               <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
                 <div className="flex items-center gap-3">
                   <img
@@ -131,46 +132,48 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
                   onClick={() => setSelectedMethod(null)}
                   className="text-xs text-blue-600 hover:underline"
                 >
-                  Ubah
+                  Change
                 </button>
               </div>
 
-              <div className="bg-blue-50/50 p-6 rounded-xl border border-blue-100 text-center mb-8">
+              {/* Added rounded-sm to info box for consistency */}
+              <div className="bg-blue-50/50 p-6 rounded-sm border border-blue-100 text-center mb-8">
                 <h3 className="text-sm font-semibold text-gray-900 mb-2">
-                  Menunggu Pembayaran
+                  Awaiting Payment
                 </h3>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  Kami telah mengirimkan notifikasi tagihan. Silakan buka
-                  aplikasi <b>{selectedMethod.appName}</b> di *smartphone* Anda
-                  untuk mengonfirmasi dan menyelesaikan transaksi ini.
+                  We have sent the billing notification. Please open the
+                  <b> {selectedMethod.appName}</b> app on your smartphone to
+                  confirm and complete this transaction.
                 </p>
               </div>
 
               <div className="mt-auto">
+                {/* CTA Button: No border radius (sharp square) */}
                 <button
                   onClick={handleCheckStatus}
-                  className="w-full bg-[#0a58ca] text-white py-4  text-sm font-medium tracking-wide hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
+                  className="w-full bg-[#0a58ca] text-white py-4 text-sm font-medium tracking-wide hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
                 >
-                  Cek Status Pembayaran
+                  Check Payment Status
                 </button>
               </div>
             </div>
           )}
 
-          {/* STATUS 2: LOADING PROSES */}
+          {/* STATUS 3: PROCESSING PAYMENT */}
           {paymentStatus === "processing" && (
             <div className="animate-fade-in flex flex-col items-center justify-center py-10">
               <div className="w-14 h-14 border-4 border-gray-100 border-t-[#0a58ca] rounded-full animate-spin mb-6"></div>
               <h3 className="text-base font-medium text-gray-900 mb-1">
-                Mengecek Status...
+                Checking Status...
               </h3>
               <p className="text-sm text-gray-500">
-                Menghubungkan ke sistem bank
+                Connecting to the bank system
               </p>
             </div>
           )}
 
-          {/* STATUS 3: SUKSES */}
+          {/* STATUS 4: SUCCESS */}
           {paymentStatus === "success" && (
             <div className="animate-fade-in-up flex flex-col items-center justify-center py-8 text-center">
               <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-inner border border-green-100">
@@ -189,13 +192,13 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
                 </svg>
               </div>
               <h3 className="text-xl font-medium text-gray-900 mb-2">
-                Pembayaran Berhasil!
+                Payment Successful!
               </h3>
               <p className="text-sm text-gray-500 mb-4 px-6">
-                Pesanan Anda telah kami terima dan sedang diproses.
+                Your order has been received and is being processed.
               </p>
               <p className="text-xs text-gray-400 animate-pulse">
-                Mengarahkan kembali...
+                Redirecting...
               </p>
             </div>
           )}

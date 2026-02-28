@@ -1,3 +1,4 @@
+// src/pages/SuccessPage.jsx
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
@@ -33,35 +34,34 @@ function SuccessPage({ wishlist, cart, setIsCartOpen, isLoggedIn }) {
           </h1>
 
           <p className="text-xs md:text-sm text-gray-500 mb-8 md:mb-10 leading-relaxed px-2 md:px-0">
-            Pesanan Anda dengan nomor{" "}
-            <span className="font-semibold text-black">#{orderNumber}</span>{" "}
-            telah berhasil dibuat. Kami sedang menyiapkan pesanan Anda dan akan
-            mengirimkan email konfirmasi beserta rincian pengiriman.
+            Your order number <span className="font-semibold text-black">#{orderNumber}</span> has been successfully placed. We are preparing your order and will send a confirmation email along with the shipping details.
           </p>
 
           {!isLoggedIn ? (
-            <div className="bg-[#fafafa] p-6 md:p-8 rounded-lg mb-8 md:mb-10 border border-gray-200 shadow-sm">
+            // Changed rounded-lg to rounded-sm for consistency with inputs/boxes
+            <div className="bg-[#fafafa] p-6 md:p-8 rounded-sm mb-8 md:mb-10 border border-gray-200 shadow-sm">
               <h3 className="text-[10px] md:text-[11px] font-bold tracking-widest uppercase mb-2 md:mb-3 text-gray-800">
-                Ingin melacak pesanan ini?
+                Want to track this order?
               </h3>
               <p className="text-[11px] md:text-xs text-gray-500 mb-5 md:mb-6 font-light leading-relaxed">
-                Buat akun sekarang untuk memantau status pengiriman secara
-                real-time dan menyimpan riwayat belanja Anda.
+                Create an account now to monitor your shipping status in real-time and save your shopping history.
               </p>
+              {/* Main CTA: Kept without rounded corners (sharp square) */}
               <button
                 onClick={() => navigate("/register")}
                 className="w-full bg-black text-white py-3.5 md:py-4 text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
               >
-                Buat Akun / Login
+                Create Account / Login
               </button>
             </div>
           ) : (
             <div className="mb-8 md:mb-10">
+               {/* Main CTA: Kept without rounded corners (sharp square) */}
               <button
                 onClick={() => navigate("/account")}
-                className="w-full bg-black text-white py-3.5 md:py-4  text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
+                className="w-full bg-black text-white py-3.5 md:py-4 text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
               >
-                Lihat Riwayat Pesanan
+                View Order History
               </button>
             </div>
           )}
@@ -69,7 +69,7 @@ function SuccessPage({ wishlist, cart, setIsCartOpen, isLoggedIn }) {
             to="/"
             className="inline-block border-b border-black text-[9px] md:text-[10px] tracking-[0.2em] uppercase pb-1 hover:text-gray-500 hover:border-gray-500 transition"
           >
-            Lanjut Belanja
+            Continue Shopping
           </Link>
         </div>
       </div>
