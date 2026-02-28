@@ -342,7 +342,7 @@ function AccountPage({ wishlist, orders, cart, setIsCartOpen, setIsLoggedIn }) {
                     value={profileData.name}
                     onChange={handleInputChange}
                     readOnly={!isEditing}
-                    className={`w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-300 ${
+                    className={`w-full border rounded-sm px-4 py-3 text-sm focus:outline-none transition-colors duration-300 ${
                       isEditing
                         ? "border-blue-400 bg-white text-gray-900 shadow-sm"
                         : "border-gray-300 bg-gray-50 text-gray-600"
@@ -361,7 +361,7 @@ function AccountPage({ wishlist, orders, cart, setIsCartOpen, setIsLoggedIn }) {
                     value={profileData.email}
                     onChange={handleInputChange}
                     readOnly={!isEditing}
-                    className={`w-full border px-4 py-3 text-sm focus:outline-none transition-colors duration-300 ${
+                    className={`w-full border rounded-sm px-4 py-3 text-sm focus:outline-none transition-colors duration-300 ${
                       isEditing
                         ? "border-blue-400 bg-white text-gray-900 shadow-sm"
                         : "border-gray-300 bg-gray-50 text-gray-600"
@@ -374,7 +374,7 @@ function AccountPage({ wishlist, orders, cart, setIsCartOpen, setIsLoggedIn }) {
                   <button
                     onClick={handleEditToggle}
                     disabled={isSaving}
-                    className={`w-40 flex items-center justify-center py-4 text-[10px] tracking-[0.2em] uppercase transition rounded-sm shadow-md ${
+                    className={`w-40 flex items-center justify-center py-4 text-[10px] tracking-[0.2em] uppercase transition  shadow-md ${
                       isEditing
                         ? "bg-green-600 hover:bg-green-700 text-white"
                         : "bg-black hover:bg-gray-800 text-white"

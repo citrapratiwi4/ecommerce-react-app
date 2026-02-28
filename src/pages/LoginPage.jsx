@@ -46,7 +46,6 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
             <h1 className="text-4xl tracking-wide mb-6">Login</h1>
             <p className="text-sm text-gray-500">
               Don't have an account?{" "}
-              {/* . INI KUNCINYA: Bawa memori ke RegisterPage! */}
               <Link
                 to="/register"
                 state={{ returnTo: fromPath }}
@@ -58,7 +57,7 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
           </div>
 
           {error && (
-            <div className="mb-6 p-4 rounded-md bg-red-50 border border-red-200 text-red-600 text-sm flex justify-between items-center animate-fadeIn">
+            <div className="mb-6 p-4 rounded-sm bg-red-50 border border-red-200 text-red-600 text-sm flex justify-between items-center animate-fadeIn">
               <span>{error}</span>
               <button
                 onClick={() => setError("")}
@@ -77,7 +76,7 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-3.5 text-sm focus:outline-none focus:border-gray-900 transition-colors"
+              className="w-full border border-gray-300 rounded-sm px-4 py-3.5 text-sm focus:outline-none focus:border-gray-900 transition-colors"
             />
 
             <input
@@ -86,7 +85,7 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-3.5 text-sm focus:outline-none focus:border-gray-900 transition-colors"
+              className="w-full border border-gray-300 rounded-sm px-4 py-3.5 text-sm focus:outline-none focus:border-gray-900 transition-colors"
             />
 
             <div className="text-center">
@@ -101,7 +100,7 @@ function LoginPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#2a2a2a] text-white py-3.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-md"
+              className="w-full bg-[#2a2a2a] text-white py-3.5 text-sm font-medium hover:bg-black transition-colors shadow-md"
             >
               {isLoading ? "Loading..." : "Login"}
             </button>

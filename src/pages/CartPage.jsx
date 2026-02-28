@@ -196,7 +196,7 @@ function CartPage({ cart, removeFromCart, updateQuantity }) {
 
               <button
                 onClick={() => navigate("/checkout")}
-                className="w-full md:w-64 bg-[#2a2a2a] text-white py-3.5 text-sm font-medium tracking-wide rounded-[30px] hover:bg-black transition shadow-lg shadow-gray-200"
+                className="w-full md:w-64 bg-[#2a2a2a] text-white py-3.5 text-sm font-medium tracking-wide  hover:bg-black transition shadow-lg shadow-gray-200"
               >
                 Check out
               </button>

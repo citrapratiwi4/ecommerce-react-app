@@ -298,7 +298,7 @@ function ProductDetail({
                   addToCart(product, selectedSize, selectedVariant?.name);
                   setIsCartOpen(true);
                 }}
-                className={`flex-1 py-3.5 md:py-4 rounded-full tracking-widest text-xs md:text-sm transition ${
+                className={`flex-1 py-3.5 md:py-4 tracking-widest text-xs md:text-sm transition ${
                   isSoldOut
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed font-bold"
                     : hasSizes && !selectedSize

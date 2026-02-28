@@ -1,3 +1,4 @@
+// src/pages/CheckoutPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -58,11 +59,13 @@ function CheckoutPage({
     type: "",
   });
   const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
+  
   const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
   );
   const totalAmount = Math.max(0, subtotal + shippingCost - localDiscount);
+  
   const shippingOptions = [
     {
       id: "jne-reg",
@@ -214,13 +217,13 @@ function CheckoutPage({
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full border rounded p-3.5 text-sm focus:outline-none transition mb-3 ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"}`}
+                className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition mb-3 ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"}`}
               />
               <div className="flex items-start gap-2">
                 <input
                   type="checkbox"
                   id="offers"
-                  className="w-4 h-4 mt-1 accent-black rounded"
+                  className="w-4 h-4 mt-1 accent-black rounded-sm"
                 />
                 <label
                   htmlFor="offers"
@@ -237,7 +240,7 @@ function CheckoutPage({
                 Delivery
               </h2>
               <div className="space-y-3.5">
-                <select className="w-full border border-gray-300 rounded p-3.5 text-sm bg-white focus:outline-none focus:border-blue-500 transition appearance-none">
+                <select className="w-full border border-gray-300 rounded-sm p-3.5 text-sm bg-white focus:outline-none focus:border-blue-500 transition appearance-none">
                   <option>Indonesia</option>
                 </select>
                 <div className="flex gap-3.5">
@@ -246,7 +249,7 @@ function CheckoutPage({
                     placeholder="First name (optional)"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   />
                   <input
                     type="text"
@@ -254,7 +257,7 @@ function CheckoutPage({
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   />
                 </div>
                 <input
@@ -263,14 +266,14 @@ function CheckoutPage({
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                  className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                 />
                 <input
                   type="text"
                   placeholder="Apartment, suite, etc. (optional)"
                   value={apartment}
                   onChange={(e) => setApartment(e.target.value)}
-                  className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                  className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                 />
                 <div className="flex gap-3.5">
                   <input
@@ -279,7 +282,7 @@ function CheckoutPage({
                     required
                     value={subDistrict}
                     onChange={(e) => setSubDistrict(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   />
                   <input
                     type="text"
@@ -287,7 +290,7 @@ function CheckoutPage({
                     required
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   />
                 </div>
                 <div className="flex gap-3.5">
@@ -295,7 +298,7 @@ function CheckoutPage({
                     required
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm bg-white focus:outline-none transition appearance-none ${province === "" ? "text-gray-500" : "text-gray-900"} ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm bg-white focus:outline-none transition appearance-none ${province === "" ? "text-gray-500" : "text-gray-900"} ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   >
                     <option value="" disabled>
                       Province
@@ -310,7 +313,7 @@ function CheckoutPage({
                     required
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
-                    className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                    className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                   />
                 </div>
                 <input
@@ -319,13 +322,13 @@ function CheckoutPage({
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className={`w-full border rounded p-3.5 text-sm focus:outline-none transition mb-2 ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                  className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition mb-2 ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                 />
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     id="save-info"
-                    className="w-4 h-4 accent-black rounded"
+                    className="w-4 h-4 accent-black rounded-sm"
                   />
                   <label
                     htmlFor="save-info"
@@ -352,7 +355,7 @@ function CheckoutPage({
               </div>
 
               <div
-                className={`border rounded-lg overflow-hidden bg-white transition-all duration-300 ${shippingError ? "border-red-500 ring-1 ring-red-500" : "border-gray-300"}`}
+                className={`border rounded-sm overflow-hidden bg-white transition-all duration-300 ${shippingError ? "border-red-500 ring-1 ring-red-500" : "border-gray-300"}`}
               >
                 <div
                   className={`p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition ${showShippingOptions ? "border-b border-gray-200 bg-gray-50" : ""}`}
@@ -432,7 +435,7 @@ function CheckoutPage({
                 All transactions are secure and encrypted.
               </p>
 
-              <div className="border border-gray-300 rounded-md overflow-hidden">
+              <div className="border border-gray-300 rounded-sm overflow-hidden">
                 <div className="flex items-center justify-between p-4 bg-white">
                   <span className="text-sm font-medium text-gray-800 tracking-wide">
                     Payments via Midtrans
@@ -468,7 +471,7 @@ function CheckoutPage({
               <h2 className="text-xl font-normal text-gray-900 mb-4">
                 Billing address
               </h2>
-              <div className="border border-gray-300 rounded-lg overflow-hidden">
+              <div className="border border-gray-300 rounded-sm overflow-hidden">
                 <div
                   className={`flex items-center p-4 border-b border-gray-200 cursor-pointer transition ${!useDifferentBilling ? "bg-gray-50" : "bg-white"}`}
                   onClick={() => setUseDifferentBilling(false)}
@@ -502,43 +505,43 @@ function CheckoutPage({
 
                 {useDifferentBilling && (
                   <div className="p-6 bg-[#fafafa] border-t border-gray-200 space-y-3.5 animate-fade-in">
-                    <select className="w-full border border-gray-300 rounded p-3.5 text-sm bg-white focus:outline-none focus:border-blue-500 transition appearance-none">
+                    <select className="w-full border border-gray-300 rounded-sm p-3.5 text-sm bg-white focus:outline-none focus:border-blue-500 transition appearance-none">
                       <option>Indonesia</option>
                     </select>
                     <div className="flex gap-3.5">
                       <input
                         type="text"
                         placeholder="First name (optional)"
-                        className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                        className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                       />
                       <input
                         type="text"
                         placeholder="Last name"
                         required
-                        className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                        className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                       />
                     </div>
                     <input
                       type="text"
                       placeholder="Address"
                       required
-                      className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                      className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                     />
                     <input
                       type="text"
                       placeholder="Apartment, suite, etc. (optional)"
-                      className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                      className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                     />
                     <div className="flex gap-3.5">
                       <input
                         type="text"
                         placeholder="City"
                         required
-                        className={`w-1/2 border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                        className={`w-1/2 border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                       />
                       <select
                         required
-                        className={`w-1/2 border rounded p-3.5 text-sm bg-white focus:outline-none transition appearance-none ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                        className={`w-1/2 border rounded-sm p-3.5 text-sm bg-white focus:outline-none transition appearance-none ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                       >
                         <option value="">Province</option>
                         <option value="Jakarta">Jakarta</option>
@@ -550,13 +553,13 @@ function CheckoutPage({
                         type="text"
                         placeholder="Postal code"
                         required
-                        className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                        className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                       />
                     </div>
                     <input
                       type="tel"
                       placeholder="Phone (optional)"
-                      className={`w-full border rounded p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
+                      className={`w-full border rounded-sm p-3.5 text-sm focus:outline-none transition ${submitAttempted ? "invalid:border-red-500 invalid:ring-1 invalid:ring-red-500 border-gray-300" : "border-gray-300 focus:border-blue-500"}`}
                     />
                   </div>
                 )}
@@ -567,7 +570,7 @@ function CheckoutPage({
               <button
                 type="submit"
                 onClick={() => setSubmitAttempted(true)}
-                className="w-full bg-black text-white py-5 rounded text-sm font-medium hover:bg-gray-800 transition shadow-md"
+                className="w-full bg-black text-white py-5 text-sm font-medium hover:bg-gray-800 transition shadow-md"
               >
                 Pay now
               </button>
@@ -617,11 +620,11 @@ function CheckoutPage({
             <div className="space-y-4 mb-6">
               {cart.map((item, idx) => (
                 <div key={idx} className="flex gap-4 items-center">
-                  <div className="relative w-16 h-16 bg-white shrink-0 rounded-lg border border-gray-200 flex items-center justify-center overflow-visible">
+                  <div className="relative w-16 h-16 bg-white shrink-0 rounded-sm border border-gray-200 flex items-center justify-center overflow-visible">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-14 h-14 object-cover rounded-md"
+                      className="w-14 h-14 object-cover rounded-sm"
                     />
                     <span className="absolute -top-2 -right-2 bg-gray-500/90 text-white text-[11px] font-medium w-[22px] h-[22px] rounded-full flex items-center justify-center z-10 shadow-sm">
                       {item.quantity}
@@ -652,13 +655,13 @@ function CheckoutPage({
                   value={discountInput}
                   onChange={(e) => setDiscountInput(e.target.value)}
                   disabled={appliedDiscountCode !== ""}
-                  className={`flex-1 border rounded p-3.5 text-sm focus:outline-none transition ${appliedDiscountCode !== "" ? "bg-gray-100 border-gray-200 text-gray-500" : "border-gray-300 focus:border-blue-500"}`}
+                  className={`flex-1 border rounded-sm p-3.5 text-sm focus:outline-none transition ${appliedDiscountCode !== "" ? "bg-gray-100 border-gray-200 text-gray-500" : "border-gray-300 focus:border-blue-500"}`}
                 />
                 <button
                   type="button"
                   onClick={handleApplyDiscount}
                   disabled={!discountInput || appliedDiscountCode !== ""}
-                  className={`font-medium px-6 rounded text-sm transition ${!discountInput || appliedDiscountCode !== "" ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-black text-white hover:bg-gray-800"}`}
+                  className={`font-medium px-6 text-sm transition ${!discountInput || appliedDiscountCode !== "" ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-black text-white hover:bg-gray-800"}`}
                 >
                   {appliedDiscountCode !== "" ? "Applied" : "Apply"}
                 </button>

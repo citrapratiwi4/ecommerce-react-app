@@ -149,7 +149,7 @@ function PaymentPage({ cart, checkoutAction, shippingCost, discountAmount }) {
               <div className="mt-auto">
                 <button
                   onClick={handleCheckStatus}
-                  className="w-full bg-[#0a58ca] text-white py-4 rounded-lg text-sm font-medium tracking-wide hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
+                  className="w-full bg-[#0a58ca] text-white py-4  text-sm font-medium tracking-wide hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
                 >
                   Cek Status Pembayaran
                 </button>

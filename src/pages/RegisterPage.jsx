@@ -43,7 +43,7 @@ function RegisterPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border px-4 py-3.5 rounded-md"
+              className="w-full border px-4 py-3.5 rounded-sm"
             />
 
             <input
@@ -52,12 +52,12 @@ function RegisterPage({ wishlist, cart, setIsCartOpen, setIsLoggedIn }) {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border px-4 py-3.5 rounded-md"
+              className="w-full border px-4 py-3.5 rounded-sm"
             />
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-3.5 rounded-full"
+              className="w-full bg-black text-white py-3.5"
             >
               Create Account
             </button>

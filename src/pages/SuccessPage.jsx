@@ -50,7 +50,7 @@ function SuccessPage({ wishlist, cart, setIsCartOpen, isLoggedIn }) {
               </p>
               <button
                 onClick={() => navigate("/register")}
-                className="w-full bg-black text-white py-3.5 md:py-4 rounded text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
+                className="w-full bg-black text-white py-3.5 md:py-4 text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
               >
                 Buat Akun / Login
               </button>
@@ -59,7 +59,7 @@ function SuccessPage({ wishlist, cart, setIsCartOpen, isLoggedIn }) {
             <div className="mb-8 md:mb-10">
               <button
                 onClick={() => navigate("/account")}
-                className="w-full bg-black text-white py-3.5 md:py-4 rounded text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
+                className="w-full bg-black text-white py-3.5 md:py-4  text-[10px] md:text-xs font-medium uppercase tracking-widest hover:bg-gray-800 transition shadow-md"
               >
                 Lihat Riwayat Pesanan
               </button>

@@ -45,7 +45,7 @@ function ForgotPasswordPage({ wishlist, cart, setIsCartOpen }) {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-full"
+              className="w-full bg-black text-white py-3 "
             >
               Send Reset Link
             </button>
